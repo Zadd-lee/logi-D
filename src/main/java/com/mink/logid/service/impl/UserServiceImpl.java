@@ -10,10 +10,14 @@ import com.mink.logid.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
     @Override
     public void create(CreateUserRequestDto dto) {
         User entity = dto.toEntity();
@@ -22,7 +26,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(()->(new CustomException(UserError.USER_NOT_FOUND)));
+        User user = userRepository.findById(id).orElseThrow(() -> (new CustomException(UserError.USER_NOT_FOUND)));
         return new UserResponseDto(user);
+    }
+
+    @Override
+    public List<UserResponseDto> findAll() {
+        Iterable<User> all = userRepository.findAll();
+        List<UserResponseDto> userResponseDtoList = new ArrayList<>();;
+        all.iterator().forEachRemaining(user-> {
+            userResponseDtoList.add(new UserResponseDto(user));
+        });
+
+        return userResponseDtoList;
+
+
     }
 }
