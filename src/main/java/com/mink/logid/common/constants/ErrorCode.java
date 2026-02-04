@@ -1,4 +1,10 @@
 package com.mink.logid.common.constants;
 
-public enum ErrorCode {
+import org.springframework.http.HttpStatus;
+
+public interface ErrorCode {
+    String name();
+    String getMessage();
+    HttpStatus getHttpStatus();
+
 }

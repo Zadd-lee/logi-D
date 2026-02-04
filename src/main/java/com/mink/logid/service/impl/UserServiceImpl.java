@@ -1,5 +1,7 @@
 package com.mink.logid.service.impl;
 
+import com.mink.logid.common.constants.UserError;
+import com.mink.logid.common.exception.CustomException;
 import com.mink.logid.dto.CreateUserRequestDto;
 import com.mink.logid.dto.UserResponseDto;
 import com.mink.logid.model.User;
@@ -20,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findById(Long id) {
-        User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow(()->(new CustomException(UserError.USER_NOT_FOUND)));
         return new UserResponseDto(user);
     }
 }
