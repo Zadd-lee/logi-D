@@ -7,6 +7,7 @@ import com.mink.logid.dto.UserResponseDto;
 import com.mink.logid.model.User;
 import com.mink.logid.repository.UserRepository;
 import com.mink.logid.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public void create(CreateUserRequestDto dto) {
         User entity = dto.toEntity();
