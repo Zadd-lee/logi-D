@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> (new CustomException(UserError.USER_NOT_FOUND)));
+        User user = userRepository.findByIdOrElseThrow(id);
         return new UserResponseDto(user);
     }
 
