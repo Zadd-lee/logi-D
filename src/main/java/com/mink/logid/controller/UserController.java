@@ -1,6 +1,7 @@
 package com.mink.logid.controller;
 
 import com.mink.logid.dto.CreateUserRequestDto;
+import com.mink.logid.dto.DeleteUserRequestDto;
 import com.mink.logid.dto.UserResponseDto;
 import com.mink.logid.dto.UpdateUserRequestDto;
 import com.mink.logid.service.UserService;
@@ -37,6 +38,12 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updateUser(@PathVariable Long id,@RequestBody UpdateUserRequestDto dto) {
         service.update(id, dto);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseEntity<Void>> delete(@PathVariable Long id,@RequestBody DeleteUserRequestDto dto) {
+        service.delete(id,dto);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

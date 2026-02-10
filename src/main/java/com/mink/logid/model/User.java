@@ -36,4 +36,8 @@ public class User extends BaseEntity{
     public void updatePw(@NotBlank String pw) {
         this.pw = pw;
     }
+
+    public void delete() {
+        enabled = false;
+    }
 }

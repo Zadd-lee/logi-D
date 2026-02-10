@@ -1,6 +1,7 @@
 package com.mink.logid.service;
 
 import com.mink.logid.dto.CreateUserRequestDto;
+import com.mink.logid.dto.DeleteUserRequestDto;
 import com.mink.logid.dto.UpdateUserRequestDto;
 import com.mink.logid.dto.UserResponseDto;
 
@@ -15,4 +16,6 @@ public interface UserService {
     List<UserResponseDto> findAll();
 
     void update(Long id, UpdateUserRequestDto dto);
+
+    void delete(Long id, DeleteUserRequestDto dto);
 }
