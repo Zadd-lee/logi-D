@@ -3,6 +3,7 @@ package com.mink.logid.service.impl;
 import com.mink.logid.common.constants.UserError;
 import com.mink.logid.common.exception.CustomException;
 import com.mink.logid.dto.CreateUserRequestDto;
+import com.mink.logid.dto.UpdateUserRequestDto;
 import com.mink.logid.dto.UserResponseDto;
 import com.mink.logid.model.User;
 import com.mink.logid.repository.UserRepository;
@@ -42,6 +43,24 @@ public class UserServiceImpl implements UserService {
 
         return userResponseDtoList;
 
+
+    }
+
+    @Transactional
+    @Override
+    public void update(Long id, UpdateUserRequestDto dto) {
+        //validation
+        User user = userRepository.findByIdOrElseThrow(id);
+        if(!dto.getPw().equals(user.getPw())) {
+            throw new CustomException(UserError.PASSWORD_MISMATCH);
+        }
+
+        if(!dto.getName().isBlank()){
+            user.updateName(dto.getName());
+        }
+        if (!dto.getPw().isBlank()) {
+            user.updatePw(dto.getPw());
+        }
 
     }
 }

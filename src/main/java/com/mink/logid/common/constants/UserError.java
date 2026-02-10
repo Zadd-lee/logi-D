@@ -12,7 +12,8 @@ public enum UserError implements ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다"),
 
     //409 CONFLICT 중복된 리소스
-    ALREADY_SAVED_USER(HttpStatus.CONFLICT, "이미 저장된 사용자입니다");
+    ALREADY_SAVED_USER(HttpStatus.CONFLICT, "이미 저장된 사용자입니다"),
+    PASSWORD_MISMATCH(HttpStatus.FORBIDDEN, "잘못된 비밀번호입니다");
 
 
     private final HttpStatus httpStatus;

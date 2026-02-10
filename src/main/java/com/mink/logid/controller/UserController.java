@@ -2,6 +2,7 @@ package com.mink.logid.controller;
 
 import com.mink.logid.dto.CreateUserRequestDto;
 import com.mink.logid.dto.UserResponseDto;
+import com.mink.logid.dto.UpdateUserRequestDto;
 import com.mink.logid.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
+
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable Long id,@RequestBody UpdateUserRequestDto dto) {
+        service.update(id, dto);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
